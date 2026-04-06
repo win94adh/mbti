@@ -1,0 +1,84 @@
+:root {
+    --bg-dark: #050505;
+    --gold: #d4af37;
+    --magic-blue: #00d4ff;
+    --gate-white: #fdfdfd;
+}
+
+body, html {
+    margin: 0; padding: 0; width: 100%; height: 100%;
+    background-color: var(--bg-dark); color: white;
+    font-family: sans-serif; overflow: hidden;
+}
+
+/* [중요] 클릭 간섭 해결 설정 */
+.gate-container {
+    position: fixed; inset: 0; z-index: 200;
+    display: flex; align-items: center; justify-content: center;
+}
+.gate-container.gate-open {
+    pointer-events: none; /* 문이 열리면 클릭이 하단으로 통과됨 */
+}
+.btn-entrance, .btn-restart, .btn-choice {
+    pointer-events: auto; /* 버튼들은 항상 클릭 가능 */
+}
+
+/* 커튼 디자인 */
+.gate-half {
+    position: absolute; top: 0; width: 50%; height: 100%;
+    background: linear-gradient(135deg, var(--gate-white) 0%, #e0e0e0 100%);
+    box-shadow: inset 0 0 100px rgba(0,0,0,0.1);
+    transition: transform 1.5s cubic-bezier(0.7, 0, 0.3, 1);
+}
+.left-gate { left: 0; border-right: 4px solid var(--gold); }
+.right-gate { right: 0; border-left: 4px solid var(--gold); }
+
+.gate-open .left-gate { transform: translateX(-100%); }
+.gate-open .right-gate { transform: translateX(100%); }
+.gate-open .btn-entrance { display: none; }
+
+/* 입장 버튼 */
+.btn-entrance {
+    position: relative; z-index: 210; padding: 20px 50px;
+    background: #111; color: var(--gold); border: 2px solid var(--gold);
+    font-size: 1.2rem; font-weight: bold; cursor: pointer;
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+}
+
+/* 무대 조명 */
+.stage-background { position: fixed; inset: 0; z-index: 1; }
+.spotlight {
+    position: absolute; top: -10%; width: 40vw; height: 130vh;
+    background: radial-gradient(ellipse at top, rgba(255,255,255,0.2), transparent 70%);
+    filter: blur(50px); transform-origin: top center; opacity: 0;
+}
+.main-beam {
+    position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 60vw; height: 100vh; background: radial-gradient(ellipse at top, rgba(212, 175, 55, 0.4), transparent 80%);
+    opacity: 0; transition: 2s; z-index: 2;
+}
+
+/* 로딩 중 조명 애니메이션 */
+.loading-active .spotlight {
+    opacity: 1; animation: swing 2s infinite ease-in-out;
+}
+#spot2 { animation-delay: 1s; }
+@keyframes swing {
+    0%, 100% { transform: rotate(-20deg); }
+    50% { transform: rotate(20deg); }
+}
+
+/* 레이아웃 */
+section { display: none; width: 100%; height: 100%; position: relative; z-index: 10; }
+section.active { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.center-content { text-align: center; width: 90%; max-width: 500px; }
+
+.choice-container { display: flex; flex-direction: column; gap: 15px; margin-top: 30px; }
+.btn-choice {
+    background: #fff; color: #222; border: none; padding: 20px;
+    border-radius: 12px; font-weight: bold; cursor: pointer; transition: 0.3s;
+}
+.btn-choice:hover { background: var(--magic-blue); color: #fff; }
+
+#fireworks { position: fixed; inset: 0; pointer-events: none; z-index: 300; }
+.desc-box { background: rgba(255,255,255,0.08); padding: 25px; border-radius: 20px; margin-top: 20px; }

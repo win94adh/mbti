@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Persona Finder - Grand Show</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <canvas id="fireworks"></canvas>
+
+    <div id="app">
+        <div class="stage-background">
+            <div class="spotlight" id="spot1"></div>
+            <div class="spotlight" id="spot2"></div>
+            <div class="main-beam" id="main-beam"></div>
+        </div>
+
+        <div id="gate-container" class="gate-container">
+            <div class="gate-half left-gate"></div>
+            <div class="gate-half right-gate"></div>
+            <button class="btn-entrance" id="entrance-btn" onclick="openGate()">공연 입장하기</button>
+        </div>
+
+        <main class="content-wrapper">
+            <section id="quiz-screen">
+                <div id="quiz-area" class="center-content"></div>
+            </section>
+
+            <section id="loading-screen">
+                <div class="center-content">
+                    <div class="magic-loader"></div>
+                    <h2 class="loading-text">페르소나 캐스팅 중...</h2>
+                    <p style="color: var(--gold); margin-top: 10px;">잠시 후 막이 오릅니다!</p>
+                </div>
+            </section>
+
+            <section id="result-screen">
+                <div class="result-card center-content">
+                    <div id="char-icon-container"></div>
+                    <h3 id="result-title"></h3>
+                    <p id="result-mbti"></p>
+                    <div class="desc-box"><p id="result-desc"></p></div>
+                    <button class="btn-restart" onclick="window.location.reload()">처음으로 돌아가기</button>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
